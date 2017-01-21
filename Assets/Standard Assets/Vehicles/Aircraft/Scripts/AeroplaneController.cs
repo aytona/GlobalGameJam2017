@@ -11,7 +11,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         [SerializeField] private float m_ZeroLiftSpeed = 300;         // The speed at which lift is no longer applied.
         [SerializeField] private float m_RollEffect = 1f;             // The strength of effect for roll input.
         [SerializeField] private float m_PitchEffect = 1f;            // The strength of effect for pitch input.
-        [SerializeField] private float m_YawEffect = 0.2f;            // The strength of effect for yaw input.
+        [SerializeField] private float m_YawEffect = 4f;            // The strength of effect for yaw input.
         [SerializeField] private float m_BankedTurnEffect = 0.5f;     // The amount of turn from doing a banked turn.
         [SerializeField] private float m_AerodynamicEffect = 0.02f;   // How much aerodynamics affect the speed of the aeroplane.
         [SerializeField] private float m_AutoTurnPitch = 0.5f;        // How much the aeroplane automatically pitches when in a banked turn.
