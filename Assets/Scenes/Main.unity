@@ -850,6 +850,7 @@ GameObject:
   - 33: {fileID: 1114890959}
   - 64: {fileID: 1114890958}
   - 23: {fileID: 1114890957}
+  - 114: {fileID: 1114890961}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -867,7 +868,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 747745f004b8222469db0f6ba553c128, type: 2}
+  - {fileID: 2100000, guid: 118c51156599dae4da5a195cdba4a57e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -915,6 +916,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1114890961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1114890956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7c29c7acbb83048b651fa43a236d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Direction: {x: 0.0001, y: 0}
+  m_Texture: {fileID: 2800000, guid: c3008f6034766f34d817513b9cd38e31, type: 3}
+  m_Renderer: {fileID: 0}
 --- !u!1 &1154700927
 GameObject:
   m_ObjectHideFlags: 0
