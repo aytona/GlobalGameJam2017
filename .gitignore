@@ -2,6 +2,12 @@
 VSCode/
 VSCode.meta
 
+# Standard Assets
+SampleScenes/
+SampleScenes.meta
+Standard Assets/
+Standard Assets.meta
+
 ### Code ###
 # Visual Studio Code - https://code.visualstudio.com/
 .settings/
