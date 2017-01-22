@@ -15,8 +15,15 @@ public class RocketUserControl1Axis : MonoBehaviour {
 	private float m_Throttle;
 	private bool m_AirBrakes;
 	private float m_Yaw;
-	private float previousAngle = 0f;
 	public LayerMask layerMask;
+	public float lerp = 0.5f;
+	public float initVal = 0f;
+
+	private float pitch = 0f;
+	private float changePitch = 0f;
+	private float targetAnglePitch = 0f;
+	private float previousAngle = 0f;
+	private float threshold = 0f;
 
 
 	private void Awake()
@@ -31,7 +38,6 @@ public class RocketUserControl1Axis : MonoBehaviour {
 		// Read input for the pitch, yaw, roll and throttle of the aeroplane.
 		m_AirBrakes = CrossPlatformInputManager.GetButton("Fire1");
 		m_Yaw = CrossPlatformInputManager.GetAxis("Horizontal");
-		float pitch = 0f;
 
 		// auto throttle up, or down if braking.
     	m_Throttle = m_AirBrakes ? -1 : 1;
@@ -43,31 +49,25 @@ public class RocketUserControl1Axis : MonoBehaviour {
 
 		if (Physics.Raycast(ray, out hit, m_maxDistance, layerMask.value))
 		{
-			if (hit.distance <= 25f)
-			{
-				Debug.DrawLine(ray.origin, hit.point);
-				m_Aeroplane.Altitude = hit.distance;
+			Debug.DrawLine(ray.origin, hit.point);
+			m_Aeroplane.Altitude = hit.distance;
 
-				// var localTarget = transform.InverseTransformPoint(new Vector3(hit.point.x, hit.point.y + m_offset, hit.point.z));
-				// float targetAnglePitch = -Mathf.Atan2(localTarget.y, localTarget.z);
-				float targetAnglePitch = -Vector3.Angle(hit.normal, -direction);
-				Debug.Log("Target Angle Pitch Before = " + targetAnglePitch);
+			float targetAnglePitch = -Vector3.Angle(hit.normal, -direction);
+			if (!Mathf.Approximately(previousAngle, targetAnglePitch))
+			{
+				previousAngle = targetAnglePitch;
 
 				// Set the target for the planes pitch, we check later that this has not passed the maximum threshold
 				targetAnglePitch = Mathf.Clamp(targetAnglePitch, -m_MaxClimbAngle*Mathf.Deg2Rad, m_MaxClimbAngle*Mathf.Deg2Rad);
-				Debug.Log("Target Angle Pitch = " + targetAnglePitch);
 
 				// calculate the difference between current pitch and desired pitch
-				float changePitch = targetAnglePitch - m_Aeroplane.PitchAngle;
+				changePitch = targetAnglePitch - m_Aeroplane.PitchAngle;
 
 				// AI applies elevator control (pitch, rotation around x) to reach the target angle
 				pitch = changePitch*m_PitchSensitivity;
 				// adjust how fast the AI is changing the controls based on the speed. Faster speed = faster on the controls.
 				float currentSpeedEffect = 1 + (m_Aeroplane.ForwardSpeed * m_SpeedEffect);
 				pitch *= currentSpeedEffect;
-				
-				// Debug.Log("Altitude = " + m_Aeroplane.Altitude);
-				Debug.Log("Pitch = " + pitch);
 			}
 		}
 
