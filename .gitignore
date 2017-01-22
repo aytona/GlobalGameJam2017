@@ -2,11 +2,15 @@
 VSCode/
 VSCode.meta
 
-# Standard Assets
+## Assets ##
+# Standard Assets #
 SampleScenes/
 SampleScenes.meta
 Standard Assets/
 Standard Assets.meta
+
+# ProCore #
+ProCore/
 
 ### Code ###
 # Visual Studio Code - https://code.visualstudio.com/
