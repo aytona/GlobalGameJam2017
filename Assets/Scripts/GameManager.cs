@@ -4,9 +4,14 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	public List<Gate> gatesList = new List<Gate>();
+	private List<Gate> gatesList = new List<Gate>();
+	private bool hasWon = false;
+	private bool hasLost = false;
 
+	private GameObject player;
 	public GameObject gates;
+	public GameObject win;
+	public GameObject loose;
 
 	/// <summary>
 	/// Awake is called when the script instance is being loaded.
@@ -18,6 +23,7 @@ public class GameManager : MonoBehaviour {
 		{
 			gatesList.Add(gateGameObject);
 		}
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	// Use this for initialization
@@ -27,13 +33,24 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		var gatesChecked = gatesList.FindAll((gate) => {
-			return gate.Passed == true;
-		});
-
-		if (gatesChecked.Count == gatesList.Count)
+		if (player == null)
 		{
-			Debug.Log("Win");
+			hasLost = true;
+			loose.SetActive(true);
+		}
+
+		if (!hasWon && !hasLost)
+		{
+			var gatesChecked = gatesList.FindAll((gate) => {
+				return gate.Passed == true;
+			});
+
+			if (gatesChecked.Count == gatesList.Count)
+			{
+				win.SetActive(true);
+				Destroy(player);
+				hasWon = true;
+			}
 		}
 	}
 }
